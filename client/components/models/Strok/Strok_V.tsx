@@ -67,7 +67,7 @@ export default function Strok_V({ className, onFileUpload }: Strok_VProps) {
       />
 
       <div
-        className={`relative rounded-[28px] h-full w-full flex items-center justify-center ${
+        className={`border-[2px] border-[#80808060] rounded-[28px] h-full w-full flex items-center justify-center ${
           dragOver ? 'border-blue-500' : ''
         }`}
         onDrop={handleDrop}
@@ -76,15 +76,6 @@ export default function Strok_V({ className, onFileUpload }: Strok_VProps) {
         onClick={triggerFileDialog} 
         style={{ cursor: 'pointer', overflow: 'hidden' }}
       >
-        <svg  className="absolute inset-0 w-full h-full">
-          <rect
-            x="0" y="0" width="100%" height="100%"
-            fill="none"
-            stroke="#b79eff"
-            stroke-width="2"
-            stroke-dasharray="28 28"
-            rx="8" ry="8"
-          />
           {fileUploaded && imageSrc ? (
               <img
                 src={imageSrc}
@@ -106,7 +97,6 @@ export default function Strok_V({ className, onFileUpload }: Strok_VProps) {
               {dragOver && <p style={{ color: 'blue' }}>Отпустите файл для загрузки</p>}
             </div>
           )}
-        </svg>
       </div>
     </div>
   );

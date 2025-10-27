@@ -10,7 +10,7 @@ export default function Main() {
             <Header/>
             <main className="">
                 <Stroks_V/>
-                <div className="mt-[150px]">
+                <div className="mt-[50px]">
                     <ProgressBar/>
                 </div>
             </main>
