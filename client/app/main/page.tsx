@@ -1,6 +1,6 @@
 import Footer from "@/components/models/Footer/Footer"
 import { Header } from "@/components/models/Header/Header"
-import Insctruct from "@/components/models/Instruct/Instruct"
+import ProgressBar from "@/components/models/ProgressBar/ProgressBar"
 import Stroks_V from "@/components/models/Strok_V/Stroks_V"
 
 
@@ -11,7 +11,7 @@ export default function Main() {
             <main className="">
                 <Stroks_V/>
                 <div className="mt-[150px]">
-                    <Insctruct/>
+                    <ProgressBar/>
                 </div>
             </main>
             <Footer/>

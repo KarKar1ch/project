@@ -19,12 +19,18 @@ export default function Stroks_V() {
   return (
     <div className="mt-[100px]">
         <div className='w-full flex justify-center'>
-            <Strok_V className="mr-[20px]" onFileUpload={handleFile1Upload} />
-            <Strok_V onFileUpload={handleFile2Upload} />
+          <div>
+            <p className='font-semibold'>Первая версия</p>
+              <Strok_V className="mr-[20px] mt-[10px]" onFileUpload={handleFile1Upload} />
+          </div>
+          <div>
+            <p className='font-semibold'>Вторая версия</p>
+              <Strok_V className='mt-[10px]' onFileUpload={handleFile2Upload} />
+          </div>
         </div>
         <div className='w-full flex justify-center mt-[50px]'>
             <button
-            className={`w-[150px] h-[30px] rounded-3xl ${isButtonEnabled ? 'bg-green-500' : 'bg-gray-400'}`}
+            className={`w-[150px] h-[30px] rounded-3xl ${isButtonEnabled ? 'bg-green-500 hover:bg-[#F0F0F0] transition-colors duration-300' : 'bg-white'}`}
             disabled={!isButtonEnabled}
             >
             Отправить

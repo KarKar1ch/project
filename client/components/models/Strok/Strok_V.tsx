@@ -1,6 +1,7 @@
 "use client"
+import { DragEvent } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
-import { useState, DragEvent } from 'react';
 
 interface Strok_VProps {
   className?: string;
@@ -10,63 +11,102 @@ interface Strok_VProps {
 export default function Strok_V({ className, onFileUpload }: Strok_VProps) {
   const [fileUploaded, setFileUploaded] = useState(false);
   const [dragOver, setDragOver] = useState(false);
-  const [imageSrc, setImageSrc] = useState<string | null>(null);  
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setDragOver(false);
-
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const file = e.dataTransfer.files[0];
-      if (file.type === 'image/jpeg' || file.type === 'image/png') {
-        const objectUrl = URL.createObjectURL(file);
-        setImageSrc(objectUrl); 
-        setFileUploaded(true);
-        if (onFileUpload) {
-          onFileUpload(true);
-        }
-      }
+      processFile(e.dataTransfer.files[0]);
       e.dataTransfer.clearData();
     }
   };
 
-  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setDragOver(true);
   };
 
-  const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setDragOver(false);
   };
 
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      processFile(e.target.files[0]);
+    }
+  };
+
+  const processFile = (file: File) => {
+    if (file.type === 'image/jpeg' || file.type === 'image/png') {
+      const objectUrl = URL.createObjectURL(file);
+      setImageSrc(objectUrl);
+      setFileUploaded(true);
+      if (onFileUpload) {
+        onFileUpload(true);
+      }
+    }
+  };
+
+  const triggerFileDialog = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
-    <div
-      className={`w-[550px] h-[350px] bg-[white] rounded-4xl p-[10px] ${className}`}
-    >
+    <div className={`w-[550px] h-[350px] bg-[white] hover:bg-[#007AFF] hover:text-white transition-colors duration-300 rounded-[40px] p-[10px] ${className}`}>
+      <input
+        type="file"
+        accept="image/jpeg, image/png"
+        style={{ display: 'none' }}
+        ref={fileInputRef}
+        onChange={handleFileSelect}
+      />
+
       <div
-        className={`border border-dashed rounded-4xl h-full w-full p-[10px] flex items-center justify-center ${
+        className={`relative rounded-[28px] h-full w-full flex items-center justify-center ${
           dragOver ? 'border-blue-500' : ''
         }`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        style={{ cursor: 'pointer', overflow: 'hidden' }} 
+        onClick={triggerFileDialog} 
+        style={{ cursor: 'pointer', overflow: 'hidden' }}
       >
-        {fileUploaded && imageSrc ? (
-          <img
-            src={imageSrc}
-            alt="Загруженное изображение"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        <svg  className="absolute inset-0 w-full h-full">
+          <rect
+            x="0" y="0" width="100%" height="100%"
+            fill="none"
+            stroke="#b79eff"
+            stroke-width="2"
+            stroke-dasharray="28 28"
+            rx="8" ry="8"
           />
-        ) : (
-          <div style={{ textAlign: 'center' }}>
-            <Image src='/img_load.svg' height={250} width={250} alt="Логотип" className='m-auto'/>
-            <p className='font-semibold'>Перетащите изображение карты сюда</p>
-            <p className='text-[#00000070]'>JPG, PNG</p>
-            {dragOver && <p style={{ color: 'blue' }}>Отпустите файл для загрузки</p>}
-          </div>
-        )}
+          {fileUploaded && imageSrc ? (
+              <img
+                src={imageSrc}
+                alt="Загруженное изображение"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block', 
+                  borderRadius: '28px' 
+                }}
+              />
+          ) : (
+            <div style={{ textAlign: 'center' }}>
+              
+              <img src="/img_load.svg" height={250} width={250} alt="Логотип" className="m-auto" />
+              <p className="font-semibold">Выберите изображение карты</p>
+              <p className="">или перетащите сюда</p>
+              {dragOver && <p style={{ color: 'blue' }}>Отпустите файл для загрузки</p>}
+            </div>
+          )}
+        </svg>
       </div>
     </div>
   );
