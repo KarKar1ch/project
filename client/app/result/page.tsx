@@ -1,4 +1,4 @@
-export function Result() {
+export default function Result() {
     return(
         <div>
             

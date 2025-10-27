@@ -2,13 +2,25 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Strok_V from '../Strok/Strok_V';
+import { useRouter } from 'next/navigation';
+
 
 export default function Stroks_V() {
   const [file1, setFile1] = useState<File | null>(null);
   const [file2, setFile2] = useState<File | null>(null);
   const [comparisonResult, setComparisonResult] = useState<string>('');
 
+  const router = useRouter();
+
   const isButtonEnabled = file1 !== null && file2 !== null;
+
+
+    const handleClick = () => {
+    if (isButtonEnabled) {
+      router.push('/result');
+    }
+    
+  };
 
   const handleCompare = () => {
     if (file1 && file2) {
@@ -30,7 +42,7 @@ export default function Stroks_V() {
     }
   };
 
-  // Очистка URL при размонтировании или смене изображения (опционально)
+ 
   useEffect(() => {
     return () => {
       if (comparisonResult) {
@@ -63,6 +75,15 @@ export default function Stroks_V() {
           onClick={handleCompare}
         >
           Сравнить
+        </button>
+        <button className={`w-[150px] h-[30px] rounded-3xl ml-[20px] ${
+            isButtonEnabled 
+              ? 'bg-black hover:bg-[#F0F0F0] text-white transition-colors duration-300' 
+              : 'bg-gray-400 text-white'
+          }`}
+          onClick={handleClick}
+          >
+            Результат
         </button>
       </div>
 
