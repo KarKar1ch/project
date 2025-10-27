@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image';
 import { useState, DragEvent } from 'react';
 
 interface Strok_VProps {
@@ -60,8 +61,9 @@ export default function Strok_V({ className, onFileUpload }: Strok_VProps) {
           />
         ) : (
           <div style={{ textAlign: 'center' }}>
-            <p>Перетащите изображение карты сюда</p>
-            <p>JPG, PNG</p>
+            <Image src='/img_load.svg' height={250} width={250} alt="Логотип" className='m-auto'/>
+            <p className='font-semibold'>Перетащите изображение карты сюда</p>
+            <p className='text-[#00000070]'>JPG, PNG</p>
             {dragOver && <p style={{ color: 'blue' }}>Отпустите файл для загрузки</p>}
           </div>
         )}
