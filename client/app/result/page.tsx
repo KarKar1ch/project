@@ -1,5 +1,5 @@
 'use client';
-
+import Image from 'next/image';
 import { useComparisonStore } from '@/state/useComparisonStore';
 import Link from 'next/link';
 import NavBar from '@/components/models/NavBar/NavBar';
@@ -19,7 +19,7 @@ export default function Result() {
   }
 
   return (
-    <div className="flex">
+    <div className="flex ">
       <NavBar/>
       <img
         src={comparisonResult}
@@ -29,6 +29,9 @@ export default function Result() {
           height: '100vh',
         }}
       />
+      <button>
+        <Image src="export_24.svg" alt="sdf" width={30} height={30} />
+      </button>
     </div>
   );
 }

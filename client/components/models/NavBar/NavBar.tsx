@@ -43,7 +43,7 @@ export default function NavBar() {
                         className="flex-shrink-0 px-4 py-2 bg-[#EBEBEB] rounded-4xl whitespace-nowrap"
                         >
                         {item.title}
-                        </button>
+                        </button>     
                     ))}
                 </div>
         </div>
