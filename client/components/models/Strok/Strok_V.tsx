@@ -37,21 +37,21 @@ export default function Strok_V({ className, onFileUpload }: Strok_VProps) {
     }
   };
 
-  const processFile = (file: File) => {
-    if (file.type === 'image/jpeg' || file.type === 'image/png') {
-      const objectUrl = URL.createObjectURL(file);
-      setImageSrc(objectUrl);
-      setFileUploaded(true);
-      if (onFileUpload) {
-        onFileUpload(file); 
-      }
-    } else {
-      alert('Пожалуйста, выберите изображение в формате JPG или PNG.');
-      if (onFileUpload) {
-        onFileUpload(null); 
-      }
+const processFile = (file: File) => {
+  if (file.type === 'image/jpeg' || file.type === 'image/png') {
+    const objectUrl = URL.createObjectURL(file);
+    setImageSrc(objectUrl);
+    setFileUploaded(true);
+    if (onFileUpload) {
+      onFileUpload(file); // ← передаём сам файл!
     }
-  };
+  } else {
+    alert('Пожалуйста, выберите изображение в формате JPG или PNG.');
+    if (onFileUpload) {
+      onFileUpload(null); // ← сбрасываем, если неверный формат
+    }
+  }
+};
 
   const triggerFileDialog = () => {
     if (fileInputRef.current) {
