@@ -43,12 +43,12 @@ export default function Strok_V({ className, onFileUpload }: Strok_VProps) {
       setImageSrc(objectUrl);
       setFileUploaded(true);
       if (onFileUpload) {
-        onFileUpload(file); // ← передаём сам файл!
+        onFileUpload(file); 
       }
     } else {
       alert('Пожалуйста, выберите изображение в формате JPG или PNG.');
       if (onFileUpload) {
-        onFileUpload(null); // ← сбрасываем, если неверный формат
+        onFileUpload(null); 
       }
     }
   };
