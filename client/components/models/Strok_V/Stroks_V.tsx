@@ -56,8 +56,8 @@ export default function Stroks_V() {
         <button
           className={`w-[150px] h-[30px] rounded-3xl ${
             isButtonEnabled 
-              ? 'bg-green-500 hover:bg-[#F0F0F0] text-black transition-colors duration-300' 
-              : 'bg-gray-400 text-white cursor-not-allowed'
+              ? 'bg-black hover:bg-[#F0F0F0] text-white transition-colors duration-300' 
+              : 'bg-gray-400 text-white'
           }`}
           disabled={!isButtonEnabled}
           onClick={handleCompare}
