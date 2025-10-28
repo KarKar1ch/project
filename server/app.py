@@ -16,11 +16,11 @@ def to_grayscale_and_resize(img_pil, max_size=(800, 600)):
 def detect_edges_binary(grayscale_img, threshold=30):
     """Возвращает бинарное изображение границ (1 = граница, 0 = фон)."""
     edges = grayscale_img.filter(ImageFilter.FIND_EDGES)
-    # Бинаризация: всё выше порога → 1 (граница), иначе → 0
+    #бинаризация: всё выше порога → 1 (граница), иначе → 0
     return edges.point(lambda p: 1 if p > threshold else 0, mode='1')
 
 def compare_and_mark_differences(img1_gray, img2_gray, threshold=30):
-    # Получаем бинарные карты границ
+    #бинарные карты границ
     edges1 = detect_edges_binary(img1_gray, threshold)
     edges2 = detect_edges_binary(img2_gray, threshold)
 
@@ -30,11 +30,11 @@ def compare_and_mark_differences(img1_gray, img2_gray, threshold=30):
     e1 = edges1.crop((0, 0, min_w, min_h))
     e2 = edges2.crop((0, 0, min_w, min_h))
 
-    # Основа для результата — вторая карта в RGB
+    #вторая карта в RGB
     base = img2_gray.crop((0, 0, min_w, min_h)).convert('RGB')
     result = base.copy()
 
-    # Подсчёт совпадений (опционально, для отладки)
+    #подсчёт совпадений
     total = min_w * min_h
     matches = 0
 
