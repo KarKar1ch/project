@@ -6,7 +6,7 @@ import Stroks_V from "@/components/models/Strok_V/Stroks_V"
 
 export default function Main() {
     return(
-        <div className="bg-[#F0F0F0] h-full">
+        <div className="bg-[#F0F0F0] h-screen">
             <Header/>
             <main className="">
                 <Stroks_V/>

@@ -1,12 +1,10 @@
 "use client"
-import { DragEvent } from 'react';
 import { useRef, useState } from 'react';
-import Image from 'next/image';
 
-interface Strok_VProps {
+type Strok_VProps = {
   className?: string;
-  onFileUpload?: (uploaded: boolean) => void;
-}
+  onFileUpload: (file: File | null) => void; // ← теперь передаём файл, а не boolean
+};
 
 export default function Strok_V({ className, onFileUpload }: Strok_VProps) {
   const [fileUploaded, setFileUploaded] = useState(false);
@@ -45,7 +43,12 @@ export default function Strok_V({ className, onFileUpload }: Strok_VProps) {
       setImageSrc(objectUrl);
       setFileUploaded(true);
       if (onFileUpload) {
-        onFileUpload(true);
+        onFileUpload(file); // ← передаём сам файл!
+      }
+    } else {
+      alert('Пожалуйста, выберите изображение в формате JPG или PNG.');
+      if (onFileUpload) {
+        onFileUpload(null); // ← сбрасываем, если неверный формат
       }
     }
   };
