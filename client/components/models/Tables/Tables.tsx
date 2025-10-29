@@ -6,8 +6,8 @@ import Image from 'next/image';
     export default function Tables() {
     const [file1, setFile1] = useState<File | null>(null);
     const [file2, setFile2] = useState<File | null>(null);
-    const fileInput1Ref = useRef<HTMLInputElement>(null);
-    const fileInput2Ref = useRef<HTMLInputElement>(null);
+    const fileInput1Ref = useRef<HTMLInputElement | null>(null);
+    const fileInput2Ref = useRef<HTMLInputElement | null>(null);
 
     const handleFileChange = (
         e: React.ChangeEvent<HTMLInputElement>,
@@ -40,9 +40,9 @@ import Image from 'next/image';
         e.preventDefault();
     };
 
-    const triggerFileInput = (ref: React.RefObject<HTMLInputElement>) => {
+        const triggerFileInput = (ref: React.RefObject<HTMLInputElement | null>) => {
         ref.current?.click();
-    };
+        };
 
     const resetFile = (
         setFile: (file: File | null) => void,
