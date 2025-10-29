@@ -30,7 +30,7 @@ const handleCompare = () => {
     formData.append('image2', file2);
 
     axios
-      .post('http://localhost:5000/compare', formData, {
+      .post('https://project-1-plzo.onrender.com/compare', formData, {
         responseType: 'blob',
       })
       .then((response) => {
