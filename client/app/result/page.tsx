@@ -95,19 +95,17 @@ export default function Result() {
           <Image src="export_24.svg" width={30} height={30} alt="Экспорт" className="m-auto" />
         </button>
 
-        {/* Кнопка для повторного открытия сайдбара */}
         {!sidebarOpen && (
           <>
             <button
               onClick={() => setSidebarOpen(true)}
-              className="absolute top-4 left-4 w-[40px] h-[40px] bg-white z-[10] rounded-[10px] shadow-[0_2px_6px_rgba(0,0,0,0.2)]"
+              className="absolute top-4 left-25 w-[40px] h-[40px] bg-white z-[10] rounded-[10px] shadow-[0_2px_6px_rgba(0,0,0,0.2) hover:bg-[#F0F0F0]] transition-colors duration-300"
               aria-label="Открыть панель"
             >
                 <Image src="sidebar_toggle_24.svg" width={30} height={30} alt="Открыть панель" className="m-auto" />
             </button>
-            <div className="flex items-center">
+            <div className="absolute top-4 left-10 flex items-center shadow-[0_2px_6px_rgba(0,0,0,0.2)">
                 <Image src="Logo.svg" width={40} height={40} alt="logo" />
-                <p className="ml-[5px] font-semibold">MapDiv</p>
             </div>
           </>
         )}

@@ -51,11 +51,11 @@ const handleCompare = () => {
     <div className="mt-[40px]">
       <div className='w-full flex justify-center'>
         <div>
-          <p className='font-semibold'>Оригинальная версия</p>
+          <p className='font-semibold text-[1.5rem]'>Оригинальная версия</p>
           <Strok_V className="mr-[20px] mt-[10px]" onFileUpload={setFile1} />
         </div>
         <div>
-          <p className='font-semibold'>Преобразованная  версия</p>
+          <p className='font-semibold text-[1.5rem]'>Преобразованная  версия</p>
           <Strok_V className='mt-[10px]' onFileUpload={setFile2} />
         </div>
       </div>
